@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasmine Miller | Personal Portfolio</title>
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        .profile-card { 
+            transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+
+        .profile-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#top">Jasmine Miller</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-collapse navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#top">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#goals-heading">My Goals</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5" id="top">
+        <div class="row justify-content-center">
+            <div class="col-10 col-md-9 col-lg-8">
+                
+                <div class="card profile-card p-4 p-md-5 shadow-sm bg-white">
+                    <div class="row align-items-center g-4">
+              
+                        <div class="col-md-4 text-center">
+                            <img src="./media/Jasmine.jpg" alt="Jasmine Miller" class="profile-img img-fluid shadow-sm">
+                        </div>
+                        
+                        <div class="col-md-8">
+                            <h1 class="display-5 fw-bold mb-1">Jasmine Miller</h1>
+                            <p class="text-muted fs-5 mb-4">Web Design & Development Portfolio</p>
+                            
+                            <hr class="my-4">
+
+                            <h2 id="goals-heading" class="h3 fw-semibold text-primary mb-3">About Me & My Goals</h2>
+                            
+                            <h3 class="h5 fw-bold mt-3">My Experience</h3>
+                            <p>I am currently still learning things day by day about web design and development. So far, some things that I have learned are Responsive design, Development tools, and HTML/Javascript. </p>
+                            
+                            <h3 class="h5 fw-bold mt-3">What I Hope to Learn</h3>
+                            <p>In this course, I hope to learn how to master layout techniques and responsive design. I also want to get comfortable with frameworks.</p>
+                            
+                            <div class="expanded-goals text-muted fst-italic border-start border-3 ps-3 my-3" style="display: none;">
+                                <p class="mb-0">Additionally, I plan on practicing modular DOM interactions, version control repository workflows, and cleaning up scripts to build strong interactive foundations!</p>
+                            </div>
+                            
+                            <button id="read-more-btn" class="btn btn-outline-dark btn-sm mb-4">Read More ↓</button>
+                            
+                            <h3 class="h5 fw-bold">Future Aspirations</h3>
+                            <p>In the future, I plan to utilize my knowledge in Web design and Development to launch a technology career such as a Front-end Web Developer. </p>
+                            
+                            <div class="mt-4">
+                                <button id="greet-user-btn" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">
+                                    Click to Connect!
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Jasmine Miller. Built with Bootstrap & jQuery.</p>
+        </div>
+    </footer>
+
+    <script src="https://jquery.com"></script>
+  
+    <script src="https://jsdelivr.net"></script>
+    
+    <script>
+        $(document).ready(function() {
+
+            $('#greet-user-btn').click(function() {
+                const hour = new Date().getHours();
+                let interactiveMessage = "Welcome!";
+                
+                if (hour < 12) {
+                    interactiveMessage = "Good morning! Thanks for stopping by early to review my Front-end Developer portfolio assets.";
+                } else if (hour < 18) {
+                    interactiveMessage = "Good afternoon! Welcome to my web space. Thank you for tracking my development journey.";
+                } else {
+                    interactiveMessage = "Good evening! Thank you for checking out my interactive code assignments tonight.";
+                }
+                alert(interactiveMessage);
+            });
+
+            $('.profile-card').hover(
+                function() {
+                    $(this).css({
+                        'transform': 'translateY(-5px)',
+                        'box-shadow': '0 1rem 3rem rgba(0,0,0,0.175)'
+                    });
+                }, 
+                function() {
+                    $(this).css({
+                        'transform': 'translateY(0)',
+                        'box-shadow': '0 0.125rem 0.25rem rgba(0,0,0,0.075)'
+                    });
+                }
+            );
+          
+            $('#read-more-btn').click(function() {
+                const $extraText = $('.expanded-goals');
+                const $btn = $(this);
+                
+                $extraText.slideToggle(300, function() {
+                    if ($extraText.is(':visible')) {
+                        $btn.text('Read Less ↑');
+                    } else {
+                        $btn.text('Read More ↓');
+                    }
+                });
+            });
+
+            const systemHour = new Date().getHours();
+            if (systemHour < 6 || systemHour >= 19) {
+                $('body').removeClass('bg-light text-dark').addClass('bg-dark text-light');
+                
+                $('.profile-card').removeClass('bg-white').css({
+                    'background-color': '#1e1e1e',
+                    'border': '1px solid #333'
+                });
+              
+                $('.text-muted').removeClass('text-muted').addClass('text-white-50');
+                $('#read-more-btn').removeClass('btn-outline-dark').addClass('btn-outline-light');
+            }
+
+            $('nav a').click(function(e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+                    const sectionHash = this.hash;
+
+                    const navbarHeight = $('.navbar').outerHeight();
+                    $('html, body').animate({
+                        scrollTop: $(sectionHash).offset().top - navbarHeight
+                    }, 600);
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
